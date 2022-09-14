@@ -2,10 +2,7 @@
 //   <-- Comentário no JAVA
 // Segunda Modificação
 
-<<<<<<< HEAD
-// alteração pela interface web
-
-// alterando arquivo branch  main
-=======
 // alteração pela interface web - 2
->>>>>>> alterar-arquivos
+
+1-) sempre deixar o código de produção na branch master
+2-) sempre  criar uma branch a partir da "branch de desenvolvimento"
