@@ -54,5 +54,6 @@ Obs: exemplo na criação do container
 
 ```
     docker run  --name NOMEDOCONTAINERDESEJO -p PORTA-HOSPEDEIRO:PORTA-CONTAINER  NOMEDAIMAGEM
+    docker run  --name NOMEDOCONTAINERDESEJO -p PORTA-EXTERNA:PORTA-INTERNA  NOMEDAIMAGEM
     Ex: docker run --name hello-world -p 80:80  docker/getting-started
 ```
