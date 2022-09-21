@@ -54,6 +54,36 @@ Obs: exemplo na criação do container
 
 ```
     docker run  --name NOMEDOCONTAINERDESEJO -p PORTA-HOSPEDEIRO:PORTA-CONTAINER  NOMEDAIMAGEM
+
     docker run  --name NOMEDOCONTAINERDESEJO -p PORTA-EXTERNA:PORTA-INTERNA  NOMEDAIMAGEM
+
     Ex: docker run --name hello-world -p 80:80  docker/getting-started
+
+    docker run --name hello-word -p 80:80 -p 8000:80 docker/getting-started
+```
+
+# Como podemos acessar o terminal de um container?
+
+Obs: o container deve estar em execução 
+
+```
+
+    docker exec -it NOMEDOCONTAINER /bin/sh
+
+    /bin/bash (terminal) é o comando que vamos executar quando ao entrar no container 
+    -it -> 'modo interativo'
+
+    Ex: docker exec -it hello-word /bin/sh
+```
+
+# Comandos Linux
+
+```
+    ls -> listar arquivos e pastas no Linux
+    cd -> entrar dentro de uma pasta
+    pwd -> mostrar em qual diretório nós estamos 
+    cd .. -> voltar um nível no sistema de diretório
+    mkdir -> criando uma pasta 
+    touch -> criar um arquivo vazio
+    cd / -> voltar para o diretório raiz
 ```
