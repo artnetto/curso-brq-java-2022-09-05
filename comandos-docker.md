@@ -108,3 +108,31 @@ Para sair do container, digite:         exit
     docker run --name hello-world -p 80:80 -p 8000:80  docker/getting-started
     docker exec -it hello-world /bin/sh
 ```
+
+# Como podemos fazer para ao deletar um container, não perdermos dados do mesmo?
+
+Resp: usando o conceito de volume
+
+```
+    docker run -v PASTA_DO_HOSPEDEIRO:PASTA_DO_CONTAINER
+
+    docker rm hello-world
+    
+    docker run --name hello-world -p 80:80 -p 8000:80 -v ${PWD}/meu-volume:/meu-volume-container docker/getting-started
+
+    docker exec -it hello-world /bin/sh
+
+cd meu-volume-container/
+touch arquivo.txt
+tail -f arquivo.txt 
+docker run --name hello-world -p 80:80 -p 8000:80 -v ${PWD}/meu-volume:/meu-volume-container docker/getting-started
+docker exec -it hello-world /bin/sh
+cd ..
+touch t.txt
+docker run --name hello-world -p 80:80 -p 8000:80 -v ${PWD}/meu-volume:/meu-volume-container-3 docker/getting-started
+```
+
+docker run -d --name=mysql-java -p 3306:3306 --env="MYSQL_ROOT_PASSWORD=root" -v ${PWD}/mysql-datadir:/var/lib/mysql    mysql
+
+docker exec -it mysql-java /bin/sh
+mysql -uroot -proot
