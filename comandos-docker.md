@@ -136,3 +136,12 @@ docker run -d --name=mysql-java -p 3306:3306 --env="MYSQL_ROOT_PASSWORD=root" -v
 
 docker exec -it mysql-java /bin/sh
 mysql -uroot -proot
+
+insert into cuentas (nombre) VALUES ('JUAN'); 
+select * from cuentas;
+
+docker run -d --name=mysql-java -p 3306:3306 --env="MYSQL_ROOT_PASSWORD=root" -v ${PWD}/mysql-datadir:/var/lib/mysql    mysql
+
+docker exec-it /bin/sh
+mysql -uroot -proot
+use db_correntista;
