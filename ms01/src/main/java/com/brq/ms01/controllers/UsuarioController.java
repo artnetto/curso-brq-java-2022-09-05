@@ -1,9 +1,13 @@
 package com.brq.ms01.controllers;
 
-        import com.brq.ms01.models.UsuarioModel;
-        import org.springframework.web.bind.annotation.*;
+import com.brq.ms01.models.UsuarioModel;
+import com.brq.ms01.services.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-        import java.util.ArrayList;
+import java.util.ArrayList;
+import java.util.List;
+
 
 // comentário
 
@@ -14,82 +18,75 @@ package com.brq.ms01.controllers;
 @RestController
 public class UsuarioController {
 
-    // Este ARRAY é Didático, Simulando um Banco de Dados
-    private ArrayList<UsuarioModel> usuarios = new ArrayList<>();
-    private int counter = 1;
+
+
+    // private UsuarioService usuService = new UsuarioService();
+    // @Autowired é importante pois permite que o Spring "instancie" o objeto do tipo UsuarioService
+    @Autowired
+    private UsuarioService usuService;
+
+
     /*
      * o @GetMapping permite associoar o verbo GET com a rota /usuarios
      * */
     @GetMapping("usuarios")
-    public ArrayList<UsuarioModel> getAllUsuarios(){
+    public List<UsuarioModel> getAllUsuarios(){
 
-//        UsuarioModel u = new UsuarioModel();
-//        u.setId(1);
-//        u.setNome("Manoel");
-//        u.setEmail("manoel@gmail.com");
+        // ISSO É VERDADEIRO?????
+        /*
+         * EM JAVA, NÃÃÃÃÃÃÃOOOO SE COMPARA STRING COM OPERADOR ==
+         * */
+//        if ("aaa" == "aaa"){
 //
-//        usuarios.add(u);
+//        }
+//        if ("aaa".equalsIgnoreCase("aaa")){
+//
+//        }
+        usuService.mostrarMensagemService();
+        //return usuarios;
+//        ArrayList<UsuarioModel> usuarios = usuService.getAllUsuarios();
+//          MANIPULAR AQUI
+//        return usuarios;
 
-        return usuarios;
+        return usuService.getAllUsuarios();
     }
 
     @PostMapping("usuarios")
     public UsuarioModel create(@RequestBody UsuarioModel usuario){
+//        UsuarioModel u = usuService.create(usuario);
+//        return u;
+        return usuService.create(usuario);
 
-        usuario.setId( counter );
-        usuarios.add(usuario);
-        counter++;
-
-        System.out.println(usuario);
-        // return "POST Usuários";
-        return usuario;
-    }
+    } // create
 
     // /usuarios/1 -> o valor do id vai ser 1
-    // /usuarios/1/Fabrizio -> o valor do id vai ser 1  e  nome é igual Fabrizio
+
     @PatchMapping("usuarios/{id}")
     public UsuarioModel update(@RequestBody UsuarioModel usuarioBody,
                                @PathVariable int id ){
-        // como achar o usuário a ser alterado?
-        for ( int i = 0; i <  usuarios.size(); i++ ){
-            if (usuarios.get(i).getId() == id){
-                // achamos o usuário a ser alterado
-                usuarios.get(i).setNome( usuarioBody.getNome() );
-                usuarios.get(i).setEmail( usuarioBody.getEmail() );
-
-                return usuarios.get(i);
-            } // if
-        }// for
-        return null;
+        //        UsuarioModel u = usuService.update(id, usuarioBody);
+        //        return u;
+        return usuService.update(id, usuarioBody);
     } // update()
 
     @DeleteMapping("usuarios/{id}")
     public String delete(@PathVariable int id){
 
-        // FORECH
-//        for (UsuarioModel usuarioLocal: usuarios) {
-//            usuarios.remove(usuarioLocal);
-//        }
-        for (int i = 0; i < usuarios.size(); i++){
-            // se achar o usuário, então exclui do arraylist
-            if (usuarios.get(i).getId() == id){
-                usuarios.remove(i);
-                return "Usuário excluido com sucesso!";
-            } // if
-        } // for
-        return "Usuário não encontrado";
+//        String response = usuService.delete(id);
+//        return response;
+
+        return usuService.delete(id);
     } // delete
 
     // busca por apenas um usuário (pelo id)
     @GetMapping("usuarios/{id}")
     public UsuarioModel getOne(@PathVariable int id){
 
-        for (int i = 0; i < usuarios.size(); i++){
-            if (usuarios.get(i).getId() == id){
-                return usuarios.get(i);
-            } // if
-        } // for
-        return null;
-    }
+//        UsuarioModel u = usuService.getOne(id);
+//        return u;
+
+        return usuService.getOne(id);
+
+    } // getOne
 
 } // UsuarioController
