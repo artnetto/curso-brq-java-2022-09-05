@@ -1,16 +1,18 @@
 package com.brq.ms01.models;
 
+import com.brq.ms01.dtos.UsuarioDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 
 /*
-* @Data, que faz o papel dos Getters, Setters e toString()
-* @Entity "diz" que a classe UsuarioModel vai ser mapeada com uma tabela no banco de dados
-* @Table especifica o nome da tabela que esta classe vai mapear
-* */
+ * @Data, que faz o papel dos Getters, Setters e toString()
+ * @Entity "diz" que a classe UsuarioModel vai ser mapeada com uma tabela no banco de dados
+ * @Table especifica o nome da tabela que esta classe vai mapear
+ * */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,7 +20,7 @@ import javax.persistence.*;
 @Table(name = "usuarios")
 public class UsuarioModel {
 
-    // UUID - eh um conj de letras e numeros para identificar unicamente um registro
+    // UUID -> é um conjunto de letras e números para identificar unicamente um registro
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user")
@@ -32,4 +34,10 @@ public class UsuarioModel {
 
     @Column(name = "telefone_user")
     private String telefone;
+
+    public UsuarioDTO toDTO(){
+        ModelMapper mapper = new ModelMapper();
+
+        return mapper.map(this, UsuarioDTO.class);
+    }
 }
