@@ -1,9 +1,13 @@
 package com.brq.ms01.controllers;
 
-        import com.brq.ms01.models.UsuarioModel;
-        import org.springframework.web.bind.annotation.*;
+import com.brq.ms01.models.UsuarioModel;
+import com.brq.ms01.services.ProfessorService;
+import com.brq.ms01.services.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-        import java.util.ArrayList;
+import java.util.ArrayList;
+
 
 // comentário
 
@@ -14,12 +18,19 @@ package com.brq.ms01.controllers;
 @RestController
 public class UsuarioController {
 
-    // Este ARRAY é Didático, Simulando um Banco de Dados
+    // ESTE ARRAYLIST É DIDÁTICO, POIS ESTÁ SIMULANDO UM BANCO DE DADOS
     private ArrayList<UsuarioModel> usuarios = new ArrayList<>();
     private int counter = 1;
+
+    // private UsuarioService usuServ = new UsuarioService();
+    @Autowired
+    private UsuarioService usuServ;
+
+    @Autowired
+    private ProfessorService profServ;
     /*
-     * o @GetMapping permite associoar o verbo GET com a rota /usuarios
-     * */
+    * o @GetMapping permite associoar o verbo GET com a rota /usuarios
+    * */
     @GetMapping("usuarios")
     public ArrayList<UsuarioModel> getAllUsuarios(){
 
@@ -36,20 +47,25 @@ public class UsuarioController {
     @PostMapping("usuarios")
     public UsuarioModel create(@RequestBody UsuarioModel usuario){
 
+        // System.out.println(usuario);
+
+        usuServ.teste();
+
         usuario.setId( counter );
         usuarios.add(usuario);
         counter++;
 
         System.out.println(usuario);
+
         // return "POST Usuários";
         return usuario;
-    }
+    } // create
 
     // /usuarios/1 -> o valor do id vai ser 1
-    // /usuarios/1/Fabrizio -> o valor do id vai ser 1  e  nome é igual Fabrizio
+
     @PatchMapping("usuarios/{id}")
     public UsuarioModel update(@RequestBody UsuarioModel usuarioBody,
-                               @PathVariable int id ){
+                                @PathVariable int id ){
         // como achar o usuário a ser alterado?
         for ( int i = 0; i <  usuarios.size(); i++ ){
             if (usuarios.get(i).getId() == id){
@@ -60,6 +76,7 @@ public class UsuarioController {
                 return usuarios.get(i);
             } // if
         }// for
+
         return null;
     } // update()
 
@@ -70,14 +87,14 @@ public class UsuarioController {
 //        for (UsuarioModel usuarioLocal: usuarios) {
 //            usuarios.remove(usuarioLocal);
 //        }
-        for (int i = 0; i < usuarios.size(); i++){
-            // se achar o usuário, então exclui do arraylist
+         for (int i = 0; i < usuarios.size(); i++){
+             // se achar o usuário, então delete do arraylist
             if (usuarios.get(i).getId() == id){
                 usuarios.remove(i);
-                return "Usuário Excluido com Sucesso!";
+                return "Usuário delatado com sucesso!";
             } // if
-        } // for
-        return "Usuário Não Encontrado";
+         } // for
+        return "Usuário não encontrado";
     } // delete
 
     // busca por apenas um usuário (pelo id)
@@ -90,8 +107,6 @@ public class UsuarioController {
             } // if
         } // for
         return null;
-    }
-
-    // GetOne
+    } // getOne
 
 } // UsuarioController

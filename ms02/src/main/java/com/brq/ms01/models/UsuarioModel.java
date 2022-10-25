@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/*
+* @Data, que faz o papel dos Getters, Setters e toString()
+* */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,19 +15,4 @@ public class UsuarioModel {
     private int id;
     private String nome;
     private String email;
-
-//    public UsuarioModel(){
-//
-//    }
-//    public UsuarioModel(int id, String nome, String email){
-//
-//    }
-//    public void setId(int i){
-//        id = i;
-//    }
-//
-//    public int getId(){
-//        return id;
-//    }
-
 }

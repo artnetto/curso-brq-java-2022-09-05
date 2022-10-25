@@ -1,13 +1,11 @@
 package com.brq.ms01.controllers;
 
 import com.brq.ms01.dtos.UsuarioDTO;
-import com.brq.ms01.models.UsuarioModel;
 import com.brq.ms01.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -29,15 +27,15 @@ public class UsuarioController {
 
 
     /*
-     * o @GetMapping permite associoar o verbo GET com a rota /usuarios
-     * */
+    * o @GetMapping permite associoar o verbo GET com a rota /usuarios
+    * */
     @GetMapping("usuarios")
     public List<UsuarioDTO> getAllUsuarios(){
 
         // ISSO É VERDADEIRO?????
         /*
-         * EM JAVA, NÃÃÃÃÃÃÃOOOO SE COMPARA STRING COM OPERADOR ==
-         * */
+        * EM JAVA, NÃÃÃÃÃÃÃOOOO SE COMPARA STRING COM OPERADOR ==
+        * */
 //        if ("aaa" == "aaa"){
 //
 //        }
@@ -68,7 +66,7 @@ public class UsuarioController {
 
     @PatchMapping("usuarios/{id}")
     public UsuarioDTO update(@RequestBody UsuarioDTO usuarioBody,
-                             @PathVariable int id ){
+                                @PathVariable int id ){
         //        UsuarioModel u = usuService.update(id, usuarioBody);
         //        return u;
         return usuService.update(id, usuarioBody);
