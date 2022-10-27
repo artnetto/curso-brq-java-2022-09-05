@@ -6,11 +6,13 @@ import lombok.NoArgsConstructor;
 
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class FinanciamentoDTO {
+@AllArgsConstructor
+public class ConsorcioDTO {
 
-    private Integer id;
-    private Integer numeroContrato;
+    private int id;
+    private String nome;
+    private String tipo;
     private Double valor;
+
 }

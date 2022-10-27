@@ -32,6 +32,10 @@ public class UsuarioDTO {
 
     private List<FinanciamentoDTO>  financiamentos;
 
+    private EnderecoDTO endereco;
+
+    private List<ConsorcioDTO> consorcios;
+
     public UsuarioModel toModel(){
 
         ModelMapper mapper = new ModelMapper();

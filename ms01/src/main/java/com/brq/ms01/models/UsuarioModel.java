@@ -10,10 +10,10 @@ import javax.persistence.*;
 import java.util.List;
 
 /*
- * @Data, que faz o papel dos Getters, Setters e toString()
- * @Entity "diz" que a classe UsuarioModel vai ser mapeada com uma tabela no banco de dados
- * @Table especifica o nome da tabela que esta classe vai mapear
- * */
+* @Data, que faz o papel dos Getters, Setters e toString()
+* @Entity "diz" que a classe UsuarioModel vai ser mapeada com uma tabela no banco de dados
+* @Table especifica o nome da tabela que esta classe vai mapear
+* */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -39,6 +39,17 @@ public class UsuarioModel {
     // no mappedBy guardamos a variável JAVA que mapeia esta entidade (UsuarioModel)
     @OneToMany(mappedBy = "usuario")
     private List<FinanciamentoModel> financiamentos;
+
+    @OneToOne(mappedBy = "usuario")
+    private EnderecoModel endereco;
+
+    @ManyToMany
+    @JoinTable(
+            name = "usuario_consorcio",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "consorcio_id")
+    )
+    private List<ConsorcioModel> consorcios;
 
     public UsuarioDTO toDTO(){
         ModelMapper mapper = new ModelMapper();

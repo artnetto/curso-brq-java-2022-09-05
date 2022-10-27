@@ -13,8 +13,8 @@ import java.util.Optional;
 
 
 /*
-* A camada Service é responsável por armazenar as regras de negócio da aplicação
-* */
+ * A camada Service é responsável por armazenar as regras de negócio da aplicação
+ * */
 @Slf4j
 @Service
 public class UsuarioService {
@@ -148,7 +148,7 @@ public class UsuarioService {
     public UsuarioDTO getOne(int id){
 
         UsuarioModel usuario = usuRepository.findById(id)
-                    .orElseThrow( () -> new RuntimeException("Usuário não localizado"));
+                .orElseThrow( () -> new RuntimeException("Usuário não localizado"));
 
         return usuario.toDTO();
 //        Optional<UsuarioModel> usuarioOptional = usuRepository.findById(id);
@@ -169,5 +169,35 @@ public class UsuarioService {
 //            } // if
 //        } // for
 //        return null;
+    }
+
+    public List<UsuarioDTO> fetchUsuariosByNome(String nomeBusca){
+
+        //List<UsuarioModel> list = usuRepository.findByNome(nomeBusca);
+        List<UsuarioModel> list = usuRepository.findByNomeContains(nomeBusca);
+
+        List<UsuarioDTO> listDTO = new ArrayList<>();
+
+        // Tipo da variável -
+        for (UsuarioModel balde : list) {
+            listDTO.add( balde.toDTO() );
+        }
+
+        return listDTO;
+    }
+
+    public List<UsuarioDTO> fetchUsuariosByNomeAndEmail(String nomeBusca, String emailBusca){
+
+        //List<UsuarioModel> list = usuRepository.findByNome(nomeBusca);
+        List<UsuarioModel> list = usuRepository.findByNomeContainsAndEmailContains(nomeBusca, emailBusca);
+
+        List<UsuarioDTO> listDTO = new ArrayList<>();
+
+        // Tipo da variável -
+        for (UsuarioModel balde : list) {
+            listDTO.add( balde.toDTO() );
+        }
+
+        return listDTO;
     }
 }
